@@ -34,7 +34,7 @@ This E-Commerce Product API is a backend solution built with Django and Django R
 - **Database**: Django ORM with models for Products and Users
 - **Authentication**: Django's built-in authentication system
 - **API Design**: RESTful principles using Django Rest Framework
-- **Deployment**: Heroku or PythonAnywhere
+- **Deployment**: PythonAnywhere
 - **Additional Features**: Pagination and filtering for product listings
 
 ## Optional Enhancements
@@ -57,12 +57,8 @@ Access the API documentation at: `<your-domain>/api/`
 
 ## Deployment
 
-This API is deployed on [PythonAnywhere/Heroku]. Access it at: `<your-deployment-url>`
+This API is deployed on [PythonAnywhere]. Access it at: `<your-deployment-url>`
 
 ## Contributors
 
-[Your Name/Team Name]
-
-## License
-
-[Your chosen license]
+[Kenward Uma Terhemba]
