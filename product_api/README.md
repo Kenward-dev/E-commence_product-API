@@ -53,11 +53,11 @@ This E-Commerce Product API is a backend solution built with Django and Django R
 
 ## API Documentation
 
-Access the API documentation at: `<your-domain>/api/`
+Access the API documentation at: `https://dogtorken.pythonanywhere.com/api/`
 
 ## Deployment
 
-This API is deployed on [PythonAnywhere]. Access it at: `<your-deployment-url>`
+This API is deployed on [PythonAnywhere]. Access it at: `https://dogtorken.pythonanywhere.com/api/`
 
 ## Contributors
 
