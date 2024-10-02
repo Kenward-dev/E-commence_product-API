@@ -46,7 +46,10 @@ This E-Commerce Product API is a backend solution built with Django and Django R
 ## Setup and Installation
 
 1. Clone the repository
-2. Install dependencies: `pip install -r requirements.txt`
+2. Install dependencies: 
+```
+pip install -r requirements.txt
+```
 3. Set up your database in `settings.py`
 4. Run migrations: `python manage.py migrate`
 5. Start the development server: `python manage.py runserver`
