@@ -32,7 +32,7 @@ This E-Commerce Product API is a backend solution built with Django and Django R
 ## Technical Details
 
 - **Database**: Django ORM with models for Products and Users
-- **Authentication**: Django's built-in authentication system
+- **Authentication**: Json Web Tokens(JWTs)
 - **API Design**: RESTful principles using Django Rest Framework
 - **Deployment**: PythonAnywhere
 - **Additional Features**: Pagination and filtering for product listings
