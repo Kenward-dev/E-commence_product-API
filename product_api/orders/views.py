@@ -33,7 +33,7 @@ class SellerOrderListView(generics.ListAPIView):
     permission_classes = [IsSeller]
 
     def get_queryset(self):
-        return Order.objects.filter(product__seller=self.request.user)
+        return Order.objects.filter(items__product__seller=self.request.user).distinct()
 
 class OrderItemReturnView(generics.UpdateAPIView):
     serializer_class = OrderItemSerializer
