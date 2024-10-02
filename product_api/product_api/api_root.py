@@ -15,7 +15,14 @@ def api_root(request, format=None):
             'token_refresh': reverse('token_refresh', request=request, format=format),
             'token_verify': reverse('token_verify', request=request, format=format),
             'user_profile': reverse('profile-update', request=request, format=format),
-            'admin': reverse('admin:index', request=request, format=format),
+            'admin': {  
+                'django_admin': reverse('admin:index', request=request, format=format),
+                'users': {
+                    'list': reverse('admin-user-list', request=request, format=format),
+                    'detail': 'api/v1/auth/admin/users/<id>/', 
+                }
+            },
+        },
         },
         # Product endpoints
         'products': {

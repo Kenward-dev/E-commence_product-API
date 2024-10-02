@@ -50,7 +50,7 @@ This E-Commerce Product API is a backend solution built with Django and Django R
 ```
 pip install -r requirements.txt
 ```
-3. Set up your database in `settings.py`
+3. Set up your database/SECRET_KEY in `settings.py`
 4. Run migrations: `python manage.py migrate`
 5. Start the development server: `python manage.py runserver`
 
