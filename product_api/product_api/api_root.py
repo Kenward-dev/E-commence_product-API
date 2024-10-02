@@ -19,10 +19,9 @@ def api_root(request, format=None):
                 'django_admin': reverse('admin:index', request=request, format=format),
                 'users': {
                     'list': reverse('admin-user-list', request=request, format=format),
-                    'detail': 'api/v1/auth/admin/users/<id>/', 
+                    'detail': 'api/v1/auth/admin/users/<id>/',
                 }
             },
-        },
         },
         # Product endpoints
         'products': {
