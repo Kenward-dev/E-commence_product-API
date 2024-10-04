@@ -4,7 +4,6 @@ from .serializers import ProductSerializer
 from rest_framework.permissions import IsAuthenticated
 from .permissions import IsSeller
 from .pagination import ProductPagination
-from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import IsAuthenticated
 from django.db.models import Q
 from django_filters.rest_framework import DjangoFilterBackend
@@ -22,7 +21,13 @@ class ProductListView(generics.ListAPIView):
         # Start with all in-stock products
         queryset = Product.objects.filter(stock_quantity__gt=0)
         
-        # Apply additional filters only if provided in the request
+        # Apply role-based filtering for seller
+        if self.request.user.is_seller() and not self.request.user.is_admin():
+            # Sellers see only their products
+            queryset = queryset.filter(seller=self.request.user)
+        # Admins and regular authenticated users see all products
+        
+        # Apply price range filters if provided
         min_price = self.request.query_params.get('min_price')
         max_price = self.request.query_params.get('max_price')
         if min_price:
@@ -30,6 +35,7 @@ class ProductListView(generics.ListAPIView):
         if max_price:
             queryset = queryset.filter(price__lte=float(max_price))
         
+        # Apply search filter if provided
         search_query = self.request.query_params.get('search')
         if search_query:
             queryset = queryset.filter(
@@ -71,22 +77,22 @@ class ProductDeleteView(generics.DestroyAPIView):
 
         
         ##################################
-# class ProductListCreateView(generics.ListCreateAPIView):
+# UpdateAPIView to GenericAPIView with PATCH method
+#from rest_framework.response import Response
+# class ProductUpdateView(generics.GenericAPIView):
 #     queryset = Product.objects.all()
 #     serializer_class = ProductSerializer
-#     permission_classes = [IsAuthenticated]
-    
-#     def create(self, request, *args, **kwargs):
-#         serializer = self.get_serializer(data=request.data)
-#         serializer.is_valid(raise_exception=True)
-        
-#         serializer.save(seller=request.user)
-#         response = {'message': 'product added successfully', 'product': serializer.data}
-#         return Response(response, status=status.HTTP_201_CREATED)
-        
+#     permission_classes = [IsSeller]
 
-# class ProductRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = Product.objects.all()
-#     serializer_class = ProductSerializer
-#     permission_classes = [IsAuthenticated]
-#     lookup_field = 'id'
+#     def get_queryset(self):
+#         # Ensure the seller can only update their own products
+#         return Product.objects.filter(seller=self.request.user)
+    
+#     # Added patch method for partial updates
+#     def patch(self, request, *args, **kwargs):
+#         instance = self.get_object()
+#         # partial=True allows partial updates
+#         serializer = self.get_serializer(instance, data=request.data, partial=True)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save()
+#         return Response(serializer.data)
